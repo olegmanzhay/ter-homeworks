@@ -32,6 +32,7 @@ https://github.com/olegmanzhay/ter-homeworks/blob/main/01/02/main.tf
 Задание 3
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Перенастроил .terraformrc для работы и со всеми регистри
+
 provider_installation {
   network_mirror {
     url = "https://terraform-mirror.yandexcloud.net/"
