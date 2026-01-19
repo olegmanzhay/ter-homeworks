@@ -1,0 +1,38 @@
+#cloud-config
+datasource:
+  Ec2:
+    strict_id: false
+ssh_pwauth: no
+users:
+- name: ubuntu
+  sudo: "ALL=(ALL) NOPASSWD:ALL"
+  shell: /bin/bash
+  ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWHfL7++hHyoR6NiE9wYd8JRekX3wusetNohbkSD9OlHHRHhQair7HDEOLDH5y7ONPsblZwux+L4vEmL4SwnHo+JunY4/v7DP+GonAUClCRwFL1gbt7bEvjPFFbOKnXLYWVSLig00Wmmm7UKJjRUoEyEQdxRO5wPLskvOboz8Xt3b404RUmYCIWNV5xSs8L6i/td105ffN/r/26pwvno8R4pTHZEBbOQU3B54sVTSfUHxbAeA/bANJ/95Dc2HAyl81ev4lDAv/1UC/Z2Leu5iiKgI/lffKEJcOpXB12aC1Cvyw0iwmGTQ6VNOTkWLGDaGmh/p78bx1DVA6ds4/SUj1
+write_files:
+  - path: "/usr/local/etc/docker-start.sh"
+    permissions: "755"
+    content: |
+      #!/bin/bash
+
+      # Docker
+      echo "Installing Docker"
+      sudo apt update -y && sudo apt install docker.io -y
+      echo "Grant user access to Docker"
+      sudo usermod -aG docker ubuntu
+      newgrp docker
+
+    defer: true
+  - path: "/usr/local/etc/docker-main.sh"
+    permissions: "755"
+    content: |
+      #!/bin/bash
+
+      # Docker run container
+      docker pull hello-world:latest
+      docker run hello-world
+
+    defer: true
+runcmd:
+  - [su, ubuntu, -c, "/usr/local/etc/docker-start.sh"]
+  - [su, ubuntu, -c, "/usr/local/etc/docker-main.sh"]

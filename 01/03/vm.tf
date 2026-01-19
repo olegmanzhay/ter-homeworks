@@ -39,6 +39,9 @@ resource "yandex_compute_instance" "dbmysql"{
     # Это map
     metadata = {
         ssh-keys = "ubuntu:${file("~/.ssh/ssh-key-15-12-25.pub")}"
+        user_data     = "${file("/home/admin-oleg/Desktop/Netology/ter-homeworks/01/03/startup-script.yml")}"
     }
+    
+
 
 }
