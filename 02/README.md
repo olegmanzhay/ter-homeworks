@@ -90,6 +90,7 @@ netology-develop-platform-db-standard-v3
 
 Задание 7
 ------------------------------------------------------------------------------------------------------------------------------------------------
+```
 > local.test_list.1
 "staging"
 
@@ -102,13 +103,15 @@ netology-develop-platform-db-standard-v3
 > format("%s is %s for %s server based on OS %s with %s vcpu, %s ram and %s virtual disks", local.test_map.admin, keys(local.test_map)[0], keys(local.servers)[1], local.servers[keys(local.servers)[1]].image, local.servers[keys(local.servers)[1]].cpu ,local.servers[keys(local.servers)[1]].ram, join(", ", local.servers[keys(local.servers)[1]].disks))
 
 "John is admin for production server based on OS ubuntu-20-04 with 10 vcpu, 40 ram and vda, vdb, vdc, vdd virtual disks"
-
+```
 
 Задание 8
 ------------------------------------------------------------------------------------------------------------------------------------------------
+```
 var.test.dev1[0]
 "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117"
 
+```
 
 Задание 9
 ------------------------------------------------------------------------------------------------------------------------------------------------
