@@ -1,0 +1,1 @@
+ru_central_b_zone = "ru-central1-b"
