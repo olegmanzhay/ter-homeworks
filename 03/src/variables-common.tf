@@ -33,3 +33,11 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "metadata_vm"{
+  type         = object({
+    serial-port-enable  = number
+    ssh-keys            = string
+  })
+  description = "metadata"
+}

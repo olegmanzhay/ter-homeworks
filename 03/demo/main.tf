@@ -124,6 +124,17 @@ resource "yandex_compute_instance" "example" {
   allow_stopping_for_update = true
 }
 
+resource "yandex_organizationmanager_os_login_settings" "my_os_login_settings" {
+  organization_id = "bpfjamcdspef2e7irf6s"
+  ssh_certificate_settings {
+    enabled = true
+  }
+  user_ssh_key_settings {
+    enabled               = true
+    allow_manage_own_keys = true
+  }
+}
+
 
 output "vms" {
   value = {
