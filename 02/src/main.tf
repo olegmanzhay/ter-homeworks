@@ -13,6 +13,7 @@ resource "yandex_vpc_subnet" "develop-b" {
   zone           = var.ru_central_b_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.ru_central_b_zone_cidr
+  route_table_id = yandex_vpc_route_table.rt.id
 }
 
 resource "yandex_vpc_gateway" "nat_gateway" {
