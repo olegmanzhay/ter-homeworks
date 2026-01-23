@@ -115,3 +115,36 @@ var.test.dev1[0]
 
 Задание 9
 ------------------------------------------------------------------------------------------------------------------------------------------------
+Алгоритм выполненных действий 
+1) Создать VM с public_ip и проверить доступ до ping yandex.ru (успешно)
+2) Удалить public_ip и проверить доступ до ping yandex.ru (доступа нет)
+3) Создать NAT egressgateway и прокинуть в подсеть таблицу маршрутизации 
+4) Проверить доступ с ВМ до ping yandex.ru (успешно)
+
+КОД: https://github.com/olegmanzhay/ter-homeworks/blob/main/02/src/main.tf#L15-L32 
+```
+resource "yandex_vpc_subnet" "develop-b" {
+  name           = var.subnet_develop_b
+  zone           = var.ru_central_b_zone
+  network_id     = yandex_vpc_network.develop.id
+  v4_cidr_blocks = var.ru_central_b_zone_cidr
+  route_table_id = yandex_vpc_route_table.rt.id // Нужно прописать чтобы заработал egress-gateway
+}
+
+resource "yandex_vpc_gateway" "nat_gateway" {
+  name = "test-gateway"
+  shared_egress_gateway {}
+}
+
+resource "yandex_vpc_route_table" "rt" {
+  name       = "test-route-table"
+  network_id = yandex_vpc_network.develop.id
+
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat_gateway.id
+  }
+}
+
+Также нужно выключить public_ip, чтобы убедиться, что действительено доступ открыт через NAT-gateway  
+```
