@@ -3,7 +3,7 @@ resource "yandex_compute_instance" "db"{
     name = each.value.vm_name
     platform_id = var.db_platform_id
     zone = var.default_zone
-    
+    hostname = "${each.value.vm_name}.ru"
     boot_disk{
         initialize_params {
             image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
@@ -26,6 +26,6 @@ resource "yandex_compute_instance" "db"{
     }
     metadata = {
         serial-port-enable = var.metadata_vm.serial-port-enable
-        ssh-keys           = local.ssh-keys
+        ssh-keys           = var.metadata_vm.ssh-keys
     }
 }

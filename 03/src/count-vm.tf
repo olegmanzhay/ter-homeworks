@@ -4,18 +4,18 @@ resource "yandex_compute_instance" "web"{
     count = 2
     name = "homework-3-web-${count.index+1}"
     platform_id = "standard-v3"
-
+    hostname = "homework-3-web-${count.index+1}.ru"
     resources {
-    cores         = 2
-    memory        = 1
-    core_fraction = 20
-  }
+        cores         = 2
+        memory        = 1
+        core_fraction = 20
+    }
 
     boot_disk {
         initialize_params {
-        image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
-        type     = "network-hdd"
-        size     = 8
+            image_id = data.yandex_compute_image.ubuntu-2204-lts.image_id
+            type     = "network-hdd"
+            size     = 10
         }
     }
     
