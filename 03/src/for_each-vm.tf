@@ -3,6 +3,7 @@ resource "yandex_compute_instance" "db"{
     name = each.value.vm_name
     platform_id = var.db_platform_id
     zone = var.default_zone
+    hostname = "${each.value.vm_name}.ru"
     
     boot_disk{
         initialize_params {
