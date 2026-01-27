@@ -15,4 +15,10 @@ locals{
             "ru-central1-d",
         ]
     }
+    rc_list = [for number in range(1,100): format("rc%02d", "${number}")]
+    
 }   
+
+
+    
+ 

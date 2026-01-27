@@ -77,4 +77,8 @@ platform_id=${i["platform_id "]}} - лишний пробел + скобка }
 
 Задание 9
 ------------------------------------------------------------------------------------------------------------------------------------------------
+```
+rc_list = [for number in range(1,100): format("rc%02d", "${number}")]
 
+[for element in [for number in range(1, 97): format("rc%02d", number)]: element if !(substr(element, -1, 1) == "0" || substr(element, -1, 1) == "7" || substr(element, -1, 1) == "8" || substr(element, -1, 1) == "9") || element == "rc19"]
+```
