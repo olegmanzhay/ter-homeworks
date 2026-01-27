@@ -63,7 +63,7 @@ curl: (28) Failed to connect to 10.0.1.11 port 81 after 130779 ms: Connection ti
 
 Задание 3 - 5
 ------------------------------------------------------------------------------------------------------------------------------------------------
-https://github.com/olegmanzhay/ter-homeworks/blob/terraform-03/03/src/disk_vm.tf  
+https://github.com/olegmanzhay/ter-homeworks/commit/b16d9a4c99922a00e72bbea5afd744bd20c82ae6
 ![alt text](images/tesk5-output.png)
 
 
