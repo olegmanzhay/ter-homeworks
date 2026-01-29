@@ -1,8 +1,12 @@
 module "network"{
   source          = "./vpc"
+  stand           = "develop"
   network_name    = "develop"
-  subnet_name     = "develop-a"
-  v4_cidr_blocks  = ["10.0.1.0/24"]
+  subnets = [
+    { name ="develop-ru-central1-a", zone = "ru-central1-a", cidr = ["10.0.1.0/24"] },
+    { name ="develop-ru-central1-b", zone = "ru-central1-b", cidr = ["10.0.2.0/24"] },
+    { name ="develop-ru-central1-d", zone = "ru-central1-d", cidr = ["10.0.3.0/24"] },
+  ]
 }
 
 
@@ -11,7 +15,7 @@ module "marketplace-vm" {
   env_name       = "develop" 
   network_id     = module.network.network_id 
   subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.network.subnet_id]
+  subnet_ids     = [module.network.subnet_ids[0]]
   instance_name  = "marketplace"
   instance_count = 2
   image_family   = "ubuntu-2004-lts"
@@ -33,8 +37,8 @@ module "analytics-vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=1.0.0"
   env_name       = "stage"
   network_id     = module.network.network_id
-  subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.network.subnet_id]
+  subnet_zones   = ["ru-central1-b"]
+  subnet_ids     = [module.network.subnet_ids[1]]
   instance_name  = "analytics"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"

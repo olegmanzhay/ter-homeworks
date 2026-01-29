@@ -43,11 +43,25 @@ variable subnet_name{
 }
 variable subnet_zone{
     type        = string
-    description = "Name of a network"
+    description = "Name of a subnet"
     default     = "ru-central1-a"
 }
 variable v4_cidr_blocks{
     type        = list
-    description = "Name of a network"
+    description = "CIDR"
     default     = ["10.0.2.0/24"]
+}
+
+variable stand{
+  type        = string
+  description = "Stand" 
+}
+
+variable subnets{
+  type    = list(object({
+      name = string
+      zone = string
+      cidr = list(string)
+  }))
+  description = "subnets"
 }
