@@ -69,7 +69,7 @@
 
 Задание 2
 ----------------------------------------------------------------------------------------------------------------------------------
-https://github.com/olegmanzhay/ter-homeworks/tree/main/04/src/vms/vpc
+https://github.com/olegmanzhay/ter-homeworks/commit/1731c5ae45efd4142fb00d21acd6ff57f2918062
 
 Задание 3
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -148,5 +148,11 @@ Terraform will perform the following actions:
 
 Plan: 0 to add, 3 to change, 0 to destroy.
 
-
 ```
+
+Задание 4
+----------------------------------------------------------------------------------------------------------------------------------
+https://github.com/olegmanzhay/ter-homeworks/commit/5233e3c119e63fffa06bfdc479a02745f8f46f45
+![alt text](vms/images/task4-subnets.png)  
+![alt text](vms/images/task4-vm.png)  
+
