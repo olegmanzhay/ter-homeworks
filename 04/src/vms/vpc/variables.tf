@@ -1,4 +1,4 @@
-###cloud vars
+#common_variables
 variable "token" {
   type        = string
   default = "~/.authorized_key_terraform.json"
@@ -28,33 +28,26 @@ variable "default_cidr" {
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
-variable "vpc_name" {
-  type        = string
-  default     = "develop"
-  description = "VPC network&subnet name"
+
+#for network
+variable network_name{
+    type        = string
+    description = "Name of a network"
+    default     = "default_network"
 }
 
-###common vars
-
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "your_ssh_ed25519_key"
-  description = "ssh-keygen -t ed25519"
+variable subnet_name{
+    type        = string
+    description = "Name of a network"
+    default     = "default_subnet"
 }
-
-###example vm_web var
-variable "vm_web_name" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "example vm_web_ prefix"
+variable subnet_zone{
+    type        = string
+    description = "Name of a network"
+    default     = "ru-central1-a"
 }
-
-###example vm_db var
-variable "vm_db_name" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "example vm_db_ prefix"
+variable v4_cidr_blocks{
+    type        = list
+    description = "Name of a network"
+    default     = ["10.0.2.0/24"]
 }
-
-
-
