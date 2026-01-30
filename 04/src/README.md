@@ -156,3 +156,121 @@ https://github.com/olegmanzhay/ter-homeworks/commit/5233e3c119e63fffa06bfdc479a0
 ![alt text](vms/images/task4-subnets.png)  
 ![alt text](vms/images/task4-vm.png)  
 
+Задание 5
+----------------------------------------------------------------------------------------------------------------------------------
+```
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/mysql_2$ terraform apply
+![alt text](vms/images/task-5-master-replica.png)  
+
+Код (в коде реализована следующая логика, если ha = true, берет все хосты из списка, если false - то только 1)
+
+Результат выполнения сценария 
+-  ha = false -> кластер с 1 нодой
+-  ha = true  -> в кластер добавляется еще 1 нода из списка 
+```
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql will be created
+  + resource "yandex_mdb_mysql_cluster" "my-mysql" {
+      + allow_regeneration_host   = false
+      + backup_retain_period_days = (known after apply)
+      + created_at                = (known after apply)
+      + deletion_protection       = (known after apply)
+      + disk_encryption_key_id    = (known after apply)
+      + environment               = "PRESTABLE"
+      + folder_id                 = (known after apply)
+      + health                    = (known after apply)
+      + host_group_ids            = (known after apply)
+      + id                        = (known after apply)
+      + mysql_config              = (known after apply)
+      + name                      = "mysql_cluster"
+      + network_id                = (known after apply)
+      + security_group_ids        = (known after apply)
+      + status                    = (known after apply)
+      + version                   = "8.0"
+
+      + access (known after apply)
+
+      + backup_window_start (known after apply)
+
+      + disk_size_autoscaling (known after apply)
+
+      + host {
+          + assign_public_ip   = true
+          + fqdn               = (known after apply)
+          + replication_source = (known after apply)
+          + subnet_id          = (known after apply)
+          + zone               = "ru-central1-a"
+        }
+
+      + maintenance_window (known after apply)
+
+      + performance_diagnostics (known after apply)
+
+      + resources {
+          + disk_size          = 10
+          + disk_type_id       = "network-hdd"
+          + resource_preset_id = "s2.micro"
+        }
+    }
+
+  
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+module.mysql_vpc.yandex_vpc_network.mynet: Creating...
+module.mysql_vpc.yandex_vpc_network.mynet: Creation complete after 6s [id=enpaf2l2p443vr1spuk0]
+module.mysql_vpc.yandex_vpc_subnet.subnet["1"]: Creating...
+module.mysql_vpc.yandex_vpc_security_group.mysql-sg: Creating...
+module.mysql_vpc.yandex_vpc_subnet.subnet["0"]: Creating...
+module.mysql_vpc.yandex_vpc_subnet.subnet["1"]: Creation complete after 2s [id=e2lmhbg496knorjdqrai]
+module.mysql_vpc.yandex_vpc_subnet.subnet["0"]: Creation complete after 2s [id=e9b1ajd4eqh3aqi2ti9k]
+module.mysql_vpc.yandex_vpc_security_group.mysql-sg: Creation complete after 3s [id=enpg975egors8bmq265q]
+module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql: Creation complete after 5m54s [id=c9ql7sin1kgm5j0q9cim]
+module.mysql_db.yandex_mdb_mysql_database.mysql_db: Creation complete after 2m25s [id=c9ql7sin1kgm5j0q9cim:test-database]
+module.mysql_db.yandex_mdb_mysql_user.user: Creation complete after 57s [id=c9ql7sin1kgm5j0q9cim:test-admin]database.mysql_db: Creating...
+
+module.mysql_db.yandex_mdb_mysql_
+
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/mysql_2$ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql will be updated in-place
+  ~ resource "yandex_mdb_mysql_cluster" "my-mysql" {
+        id                        = "c9ql7sin1kgm5j0q9cim"
+        name                      = "mysql_cluster"
+        # (15 unchanged attributes hidden)
+
+      + host {
+          + assign_public_ip = true
+          + subnet_id        = "e2lmhbg496knorjdqrai"
+          + zone             = "ru-central1-b"
+        }
+
+        # (7 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql: Modifying... [id=c9ql7sin1kgm5j0q9cim]
+module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql: Still modifying... [id=c9ql7sin1kgm5j0q9cim, 00m10s elapsed]
+
+
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+
+```

@@ -22,3 +22,44 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
+
+
+#for cluster
+
+variable "network_id" {
+  type        = string
+  description = "Network id"
+}
+
+variable "version_mysql" {
+  type        = string
+  description = "varsion mysql"
+}
+
+variable "cluster_name" {
+  type        = string
+  description = "Name of a cluster"
+}
+
+variable "security_group_id" {
+  type        = string
+  description = "Группа безопасности"
+}
+
+variable "ha" {
+  type        = bool
+  default     = true
+  description = "high avaliability"
+}
+
+
+variable hosts{
+  type    = list(object({
+      subnet_id = string
+      zone = string
+      nat = bool
+  }))
+  description = "hosts"
+}
+

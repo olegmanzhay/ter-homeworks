@@ -22,3 +22,27 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
+
+
+#for network
+variable network_name{
+    type        = string
+    description = "Name of a network"
+    default     = "default_network"
+}
+
+variable security_group_name{
+    type        = string
+    description = "Name of a security_group"
+    default     = "default_security_group"
+}
+
+variable subnets{
+  type    = list(object({
+      name = string
+      zone = string
+      cidr = list(string)
+  }))
+  description = "subnets"
+}

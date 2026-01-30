@@ -1,4 +1,6 @@
-#common_variables
+###cloud vars
+
+###cloud vars
 variable "token" {
   type        = string
   default = "~/.authorized_key_terraform.json"
@@ -22,3 +24,20 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
+variable "cluster_id" {
+  type        = string
+}
+
+variable "db_name" {
+  type        = string
+}
+
+variable "user_name" {
+  type        = string
+}
+
+variable "user_password" {
+  type        = string
+}
+
