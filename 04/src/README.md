@@ -158,16 +158,19 @@ https://github.com/olegmanzhay/ter-homeworks/commit/5233e3c119e63fffa06bfdc479a0
 
 Задание 5
 ----------------------------------------------------------------------------------------------------------------------------------
-```
-admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/mysql_2$ terraform apply
 ![alt text](vms/images/task-5-master-replica.png)  
 
-Код (в коде реализована следующая логика, если ha = true, берет все хосты из списка, если false - то только 1)
+https://github.com/olegmanzhay/ter-homeworks/tree/main/04/mysql_2  
 
+Код (в коде реализована следующая логика, если ha = true, берет все хосты из списка, если false - то только 1)
 Результат выполнения сценария 
 -  ha = false -> кластер с 1 нодой
 -  ha = true  -> в кластер добавляется еще 1 нода из списка 
+
 ```
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/mysql_2$ terraform apply
+
+
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
 
