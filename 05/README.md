@@ -95,7 +95,7 @@ Check: CKV_SECRET_6: "Base64 High Entropy String"
 ```
 
 Ушел из хардкода кредов в vault (PR)
-https://github.com/olegmanzhay/ter-homeworks/compare/terraform-05...olegmanzhay:ter-homeworks:terraform-hotfix
+https://github.com/olegmanzhay/ter-homeworks/pull/1
 
 Задание 4
 -------------------------------------------------------------------------------------------------------------------------------------------
