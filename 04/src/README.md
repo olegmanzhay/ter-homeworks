@@ -295,6 +295,7 @@ Changes to Outputs:
     }
 
 You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
-```
+```  
+https://github.com/olegmanzhay/ter-homeworks/blob/main/04/vault/main.tf - создание секрета в vault
 
 ![alt text](vms/images/task-7-create-secret.png)  
