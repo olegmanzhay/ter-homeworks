@@ -30,7 +30,16 @@ module "mysql_db"{
     source                  = "./modules/mysql_db_username"
 
     cluster_id              = module.mysql_cluster.cluster_id
-    db_name                 = "test-database"
-    user_name               = "test-admin"
-    user_password           = "test-admin"
+    db_name       = data.vault_generic_secret.mysql_credentials.data["db_name"]
+    user_name     = data.vault_generic_secret.mysql_credentials.data["user_name"]
+    user_password = data.vault_generic_secret.mysql_credentials.data["user_password"]
+}
+
+
+data "vault_generic_secret" "vault_example"{
+ path = "secret/test"
+}
+
+output "vault_db_pass" {
+ value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
 }
