@@ -27,6 +27,8 @@
 
 Задание 2
 -------------------------------------------------------------------------------------------------------------------------------------------
+Миграция tfstate - S3
+
 ```
 admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/s3$ terraform init
 Initializing the backend...
@@ -38,9 +40,13 @@ Do you want to copy existing state to the new backend?
 
   Enter a value: yes
 
+```
+![alt text](images/task2-s3-tfstate.png)  
 
 
-  erraform apply
+Снятие блокировки  
+```
+  admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/s3$ terraform apply
 ╷
 │ Error: Error acquiring the state lock
 │ 
@@ -76,3 +82,20 @@ The state has been unlocked, and Terraform commands should now be able to
 obtain a new lock on the remote state.
 ```
 
+
+Задание 3
+-------------------------------------------------------------------------------------------------------------------------------------------
+Результат работы Checkov
+```
+Check: CKV_SECRET_6: "Base64 High Entropy String"
+        FAILED for resource: 3f18cbc16519d859e11e7bef7451f9ed5b6a7c4b
+        File: /main.tf:35-36
+
+                35 |     user_password           = "te**********"
+```
+
+Ушел из хардкода кредов в vault (PR)
+https://github.com/olegmanzhay/ter-homeworks/compare/terraform-05...olegmanzhay:ter-homeworks:terraform-hotfix
+
+Задание 4
+-------------------------------------------------------------------------------------------------------------------------------------------
