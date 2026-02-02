@@ -16,6 +16,25 @@ terraform {
     }
   }
   required_version = "~>1.12.0"
+
+   backend "s3" {
+    bucket  = "simple-bucket-ttz4w9c2"
+    key     = "terraform.tfstate"
+    region  = "ru-central1"
+    
+    # Встроенный механизм блокировок (Terraform >= 1.6)
+    # Не требует отдельной базы данных!
+    use_lockfile = true
+    
+    endpoints = {
+      s3 = "https://storage.yandexcloud.net"
+    }
+    
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+  }
 }
 
 provider "yandex" {
@@ -34,3 +53,4 @@ provider "aws" {
   access_key                  = "mock_access_key"
   secret_key                  = "mock_secret_key"
 }
+
