@@ -284,3 +284,17 @@ https://github.com/olegmanzhay/ter-homeworks/tree/main/04/s3
 
 Задание 7
 ----------------------------------------------------------------------------------------------------------------------------------
+```
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/04/vault$ terraform plan
+data.vault_generic_secret.vault_example: Reading...
+data.vault_generic_secret.vault_example: Read complete after 0s [id=secret/example]
+
+Changes to Outputs:
+  + vault_example = {
+      + test = "congrats!"
+    }
+
+You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
+```
+
+![alt text](vms/images/task-7-create-secret.png)  
