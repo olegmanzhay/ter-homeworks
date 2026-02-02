@@ -277,3 +277,5 @@ module.mysql_cluster.yandex_mdb_mysql_cluster.my-mysql: Still modifying... [id=c
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 
 ```
+Задание 6
+----------------------------------------------------------------------------------------------------------------------------------
