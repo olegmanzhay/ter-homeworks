@@ -99,3 +99,48 @@ https://github.com/olegmanzhay/ter-homeworks/pull/1
 
 Задание 4
 -------------------------------------------------------------------------------------------------------------------------------------------
+
+```
+terraform console
+> var.ip_address
+"192.168.0.1"
+
+terraform console
+╷
+│ Error: Invalid value for variable
+│ 
+│   on variables.tf line 1:
+│    1: variable "ip_address" {
+│     ├────────────────
+│     │ var.ip_address is "192.1608.0.1"
+│ 
+│ Значение должно быть корректным IPv4‑адресом (например, 192.168.0.1).
+│ 
+│ This was checked by the validation rule at variables.tf:7,3-13.
+
+
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+> var.ip_list
+tolist([
+  "192.168.0.1",
+  "1.1.1.1",
+  "127.0.0.1",
+])
+> ^C
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+╷
+│ Error: Invalid value for variable
+│ 
+│   on variables.tf line 13:
+│   13: variable "ip_list" {
+│     ├────────────────
+│     │ var.ip_list is list of string with 3 elements
+│ 
+│ Все элементы списка должны быть корректными IPv4‑адресами.
+│ 
+│ This was checked by the validation rule at variables.tf:18,3-13.
+╵
+
+╷
+│ Warning: Due to the problems above, some expressions may produce unexpected results.
+```
