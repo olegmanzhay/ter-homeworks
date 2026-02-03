@@ -146,3 +146,50 @@ admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/0
 ╷
 │ Warning: Due to the problems above, some expressions may produce unexpected results.
 ```
+
+
+Задание 5
+-------------------------------------------------------------------------------------------------------------------------------------------
+КОД
+https://github.com/olegmanzhay/ter-homeworks/blob/terraform-05/05/variables.tf
+
+```
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+> var.lowercase_string
+"пример строки без заглавных букв"
+> ^C
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+╷
+│ Error: Invalid value for variable
+│ 
+│   on variables.tf line 26:
+│   26: variable "lowercase_string" {
+│     ├────────────────
+│     │ var.lowercase_string is "пример строки без заглавных букD"
+│ 
+│ Строка не должна содержать символов верхнего регистра.
+│ 
+│ This was checked by the validation rule at variables.tf:31,3-13.
+
+
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+> var.in_the_end_there_can_be_only_one
+{
+  "Connor" = false
+  "Duncan" = true
+}
+
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/05$ terraform console
+╷
+│ Error: Invalid value for variable
+│ 
+│   on variables.tf line 37:
+│   37: variable "in_the_end_there_can_be_only_one" {
+│     ├────────────────
+│     │ var.in_the_end_there_can_be_only_one.Connor is true
+│     │ var.in_the_end_there_can_be_only_one.Duncan is true
+│ 
+│ There can be only one MacLeod
+│ 
+│ This was checked by the validation rule at variables.tf:48,3-13.
+```
