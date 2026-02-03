@@ -99,6 +99,8 @@ https://github.com/olegmanzhay/ter-homeworks/pull/1
 
 Задание 4
 -------------------------------------------------------------------------------------------------------------------------------------------
+КОД
+https://github.com/olegmanzhay/ter-homeworks/blob/terraform-05/05/variables.tf
 
 ```
 terraform console
