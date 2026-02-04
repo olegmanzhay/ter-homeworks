@@ -1,0 +1,33 @@
+#cloud-config
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWHfL7++hHyoR6NiE9wYd8JRekX3wusetNohbkSD9OlHHRHhQair7HDEOLDH5y7ONPsblZwux+L4vEmL4SwnHo+JunY4/v7DP+GonAUClCRwFL1gbt7bEvjPFFbOKnXLYWVSLig00Wmmm7UKJjRUoEyEQdxRO5wPLskvOboz8Xt3b404RUmYCIWNV5xSs8L6i/td105ffN/r/26pwvno8R4pTHZEBbOQU3B54sVTSfUHxbAeA/bANJ/95Dc2HAyl81ev4lDAv/1UC/Z2Leu5iiKgI/lffKEJcOpXB12aC1Cvyw0iwmGTQ6VNOTkWLGDaGmh/p78bx1DVA6ds4/SUj1
+package_update: true
+package_upgrade: false
+
+# Установка базовых зависимостей
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+
+
+runcmd:
+  - sudo apt update
+  - sudo apt install -y ca-certificates curl gnupg lsb-release
+  - sudo install -m 0755 -d /etc/apt/keyrings
+  - sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - sudo chmod a+r /etc/apt/keyrings/docker.asc
+  - |
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - sudo apt update
+  - sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  - sudo systemctl enable docker
+  - sudo systemctl start docker
+  - sudo usermod -aG docker ubuntu
