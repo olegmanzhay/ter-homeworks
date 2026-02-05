@@ -21,50 +21,105 @@ https://github.com/olegmanzhay/ter-homeworks/blob/terraform-05/project/modules/v
 
 
 Задание 4.
----------------------------------------------------------------------------------------------------------------------------------------------------Завяжите работу приложения в контейнере на БД в Yandex Cloud.  
+---------------------------------------------------------------------------------------------------------------------------------------------------Завяжите работу приложения в контейнере на БД в Yandex Cloud.    
+
+
+Прериквизиты: 
+ip VM: 93.77.180.112  
+ip DB: rc1a-3i8ofgkbtphk5qfd.mdb.yandexcloud.net  
+
+Результат  
+
+```
+admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/project/modules/vms/example$ curl -v http://93.77.180.112:8090/
+*   Trying 93.77.180.112:8090...
+* Connected to 93.77.180.112 (93.77.180.112) port 8090
+> GET / HTTP/1.1
+> Host: 93.77.180.112:8090
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Server: nginx/1.29.4
+< Date: Thu, 05 Feb 2026 08:10:22 GMT
+< Content-Type: application/json
+< Content-Length: 47
+< Connection: keep-alive
+< 
+* Connection #0 to host 93.77.180.112 left intact
+"TIME: 2026-02-05 08:10:22, IP: 94.140.151.251"
+```
 ![Mysql](images/db.png)
 
-ловлю следующую ошибку при прокидывании порта 8090 ВМ на контейнер
-```
-docker run -d   -p 8090:8090   -e DB_HOST=rc1a-flft5ubbf3qol693.mdb.yandexcloud.net   --name my-app   a3fff29b58be
-d8354c5ce193d0e7a862bbf24dad8d6b87ed0fb80fd84ec819320c052802473e
-ubuntu@fhm8e0j0u10i81em9eqb:~$ curl -v http://localhost:8090
-*   Trying 127.0.0.1:8090...
-* Connected to localhost (127.0.0.1) port 8090 (#0)
-> GET / HTTP/1.1
-> Host: localhost:8090
-> User-Agent: curl/7.81.0
-> Accept: */*
-> 
-* Recv failure: Connection reset by peer
-* Closing connection 0
-curl: (56) Recv failure: Connection reset by peer
-```  
 
-При этом если прокинуть 8090 на 5000   
-
-```
-ubuntu@fhm8e0j0u10i81em9eqb:~$ docker run -d   -p 8090:5000   -e DB_HOST=rc1a-flft5ubbf3qol693.mdb.yandexcloud.net   --name my-app   a3fff29b58be
-bcc42b038f9cce94a43a5e0cba558dfb5dd7d9ea719640186e17cab9c94d0d28
-ubuntu@fhm8e0j0u10i81em9eqb:~$ curl -v http://localhost:8090
-*   Trying 127.0.0.1:8090...
-* Connected to localhost (127.0.0.1) port 8090 (#0)
-> GET / HTTP/1.1
-> Host: localhost:8090
-> User-Agent: curl/7.81.0
-> Accept: */*
-> 
-* Mark bundle as not supporting multiuse
-< HTTP/1.1 200 OK
-< date: Wed, 04 Feb 2026 14:23:27 GMT
-< server: uvicorn
-< content-length: 278
-< content-type: application/json
-< 
-* Connection #0 to host localhost left intact
-"TIME: 2026-02-04 14:23:28, IP: похоже, что вы направляете запрос в неверный порт(например curl http://127.0.0.1:5000). Правильное выполнение задания - отправить запрос в порт 8090."
-```
-
+Документация по работе   
 https://yandex.cloud/ru/docs/cli/quickstart#install
 https://yandex.cloud/ru/docs/container-registry/operations/docker-image/docker-image-pull
 https://yandex.cloud/ru/docs/terraform/resources/container_registry
+
+-------------------------------------------------------------------------
+Выполненные этапы:
+
+-------------------------------------------------------------------------
+Для загрузки образов в контейнер регистри
+crp7h6sd8aeq2d7fbugb
+```
+docker tag nginx cr.yandex/crp7h6sd8aeq2d7fbugb/nginx:latest
+docker tag haproxy cr.yandex/crp7h6sd8aeq2d7fbugb/haproxy:2.4
+docker tag web cr.yandex/crp7h6sd8aeq2d7fbugb/web:1.0.0
+
+docker push cr.yandex/crp7h6sd8aeq2d7fbugb/nginx:latest
+docker push cr.yandex/crp7h6sd8aeq2d7fbugb/haproxy:2.4
+docker push cr.yandex/crp7h6sd8aeq2d7fbugb/web:1.0.0
+```
+-------------------------------------------------------------------------
+
+Установка yc
+```
+curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+exec -l $SHELL
+yc init
+yc config list
+
+
+echo <token>|docker login \
+  --username oauth \
+  --password-stdin \
+ cr.yandex
+```
+-------------------------------------------------------------------------
+
+Скачать образы на ВМ из контейнер регистри
+```
+yc container image list
+docker pull cr.yandex/crp7h6sd8aeq2d7fbugb/web:1.0.0
+docker pull cr.yandex/crp7h6sd8aeq2d7fbugb/nginx:latest
+docker pull cr.yandex/crp7h6sd8aeq2d7fbugb/haproxy:2.4
+```
+-------------------------------------------------------------------------
+Подключиться к БД
+```
+mkdir -p ~/.mysql && \
+wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" \
+   --output-document ~/.mysql/root.crt && \
+chmod 0600 ~/.mysql/root.crt
+
+sudo apt update && sudo apt install --yes mysql-client
+
+mysql --host=rc1a-3i8ofgkbtphk5qfd.mdb.yandexcloud.net \
+      --port=3306 \
+      --ssl-ca=~/.mysql/root.crt \
+      --ssl-mode=VERIFY_IDENTITY \
+      --user=app \
+      --password= \
+      example
+
+В БД выдал гранты, при этом сначала выдал пользавателю app права админа БД (может быть дальше и не нужно было выдавать гранты)
+GRANT ALL PRIVILEGES ON example.* TO 'app'@'%';
+FLUSH PRIVILEGES;
+```
+
+Выполнил корректировку env, для прокидывания fqdn DB
+Выполнил curl со своей локальной машины до хоста тачки в клауде 
+
+-------------------------------------------------------------------------
