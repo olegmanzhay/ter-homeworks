@@ -21,14 +21,14 @@ https://github.com/olegmanzhay/ter-homeworks/blob/terraform-05/project/modules/v
 
 
 Задание 4.
----------------------------------------------------------------------------------------------------------------------------------------------------Завяжите работу приложения в контейнере на БД в Yandex Cloud.    
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-Прериквизиты: 
+Завяжите работу приложения в контейнере на БД в Yandex Cloud.    
+Прериквизиты:   
 ip VM: 93.77.180.112  
 ip DB: rc1a-3i8ofgkbtphk5qfd.mdb.yandexcloud.net  
 
-Результат  
+**Результат**  
 
 ```
 admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/project/modules/vms/example$ curl -v http://93.77.180.112:8090/
@@ -52,13 +52,13 @@ admin-oleg@admin-oleg-VMware-Virtual-Platform:~/Desktop/Netology/ter-homeworks/p
 ![Mysql](images/db.png)
 
 
-Документация по работе   
+**Документация по работе**
 https://yandex.cloud/ru/docs/cli/quickstart#install
 https://yandex.cloud/ru/docs/container-registry/operations/docker-image/docker-image-pull
 https://yandex.cloud/ru/docs/terraform/resources/container_registry
 
 -------------------------------------------------------------------------
-Выполненные этапы:
+**Выполненные этапы**
 
 -------------------------------------------------------------------------
 Для загрузки образов в контейнер регистри
