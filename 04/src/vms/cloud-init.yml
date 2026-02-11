@@ -5,7 +5,7 @@ users:
     shell: /bin/bash
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh_authorized_keys:
-      - ${ssh_public_key}
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWHfL7++hHyoR6NiE9wYd8JRekX3wusetNohbkSD9OlHHRHhQair7HDEOLDH5y7ONPsblZwux+L4vEmL4SwnHo+JunY4/v7DP+GonAUClCRwFL1gbt7bEvjPFFbOKnXLYWVSLig00Wmmm7UKJjRUoEyEQdxRO5wPLskvOboz8Xt3b404RUmYCIWNV5xSs8L6i/td105ffN/r/26pwvno8R4pTHZEBbOQU3B54sVTSfUHxbAeA/bANJ/95Dc2HAyl81ev4lDAv/1UC/Z2Leu5iiKgI/lffKEJcOpXB12aC1Cvyw0iwmGTQ6VNOTkWLGDaGmh/p78bx1DVA6ds4/SUj1"
 package_update: true
 package_upgrade: false
 packages: 
